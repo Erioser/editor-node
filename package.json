@@ -1,0 +1,27 @@
+{
+  "name": "editor-node",
+  "version": "1.0.0",
+  "description": "在node中使用富文本编辑器",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "hotnode server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erioser/editor-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erioser/editor-node/issues"
+  },
+  "homepage": "https://github.com/Erioser/editor-node#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "formidable": "^1.1.1",
+    "wangeditor": "^3.0.15"
+  }
+}
