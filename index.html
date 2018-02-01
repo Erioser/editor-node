@@ -7,34 +7,44 @@
     <title>Document</title>
 </head>
     <div id="editor">
-        <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+        
     </div>
+
+    <button id="btn0">提交</button>
     <button id="btn1">获取html</button>
     <button id="btn2">获取text</button>
+
     <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
     <script src="/jquery.js"></script>
     <script type="text/javascript" src="/wangeditor/wangEditor.min.js"></script>
     <script type="text/javascript">
+        //editor的构造器
         var E = window.wangEditor
+        //实例化实例
         var editor = new E('#editor')
-        // 或者 var editor = new E( document.getElementById('editor') )
-        editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
-        editor.customConfig.uploadFileName = 'wangEditor_uploadImg'
+        
+        editor.customConfig.uploadImgServer = '/upload'  // 设置上传图片，且设置上传图片的路径
         // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
 
-        
+        //上传图片的时候给字段起的名字
+        editor.customConfig.uploadFileName = 'wangEditor_uploadImg'
+
+        //上传图片的监听函数
         editor.customConfig.uploadImgHooks = {
+            //当成功的时候
             success: function (xhr, editor, result) {
                 editor.txt.append('<img src="'+result.imgurl+'"/>')
             }
         }
 
+        //生成富文本编辑器
         editor.create()
-        // editor.txt.html('<p>用 JS 设置的内容</p>')
-        
-        document.getElementById('btn1').addEventListener('click', function () {
+
+        //点击的时候提交
+        document.getElementById('btn0').addEventListener('click', function () {
+            //获取到了用户输入的内容(html)
             let content = editor.txt.html()
-            console.log(content)
+            //像后端提交
             $.ajax({
                 url:'/submit',
                 type:'post',
@@ -45,6 +55,14 @@
             })
         }, false)
 
+
+        //获取内容转换成html的片段
+        document.getElementById('btn1').addEventListener('click', function () {
+            // 读取 html
+            console.log(editor.txt.html())
+        }, false)
+
+        //获取text类型的内容
         document.getElementById('btn2').addEventListener('click', function () {
             // 读取 text
             console.log(editor.txt.text())
